@@ -30,6 +30,14 @@ class UsersController {
         return response.status(201).json({ message: "Usuário criado com sucesso!" })
     }
 
+    async delete(request, response) {
+        const { id } = request.body
+
+        await dbService.deleteUser(id)
+
+        return response.status(200).json({ message: "Usuário deletado com sucesso!" })
+    }
+
     async index(request, response) {
         const users = await dbService.getAllUsers()
 

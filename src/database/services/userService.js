@@ -19,6 +19,10 @@ class UserDBService {
 
         return users
     }
+
+    async deleteUser(id) {
+        await User.deleteOne({ _id: Types.ObjectId.createFromHexString(id) })
+    }
 }
 
 module.exports = UserDBService;
