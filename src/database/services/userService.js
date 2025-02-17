@@ -13,6 +13,12 @@ class UserDBService {
 
         await user.save()
     }
+
+    async getAllUsers() {
+        const users = await User.find()
+
+        return users
+    }
 }
 
 module.exports = UserDBService;

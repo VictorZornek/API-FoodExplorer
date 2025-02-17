@@ -29,6 +29,12 @@ class UsersController {
 
         return response.status(201).json({ message: "Usuário criado com sucesso!" })
     }
+
+    async index(request, response) {
+        const users = await dbService.getAllUsers()
+
+        return response.status(200).json(users)
+    }
 }
 
 module.exports = UsersController;
