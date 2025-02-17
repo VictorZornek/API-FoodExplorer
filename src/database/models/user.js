@@ -24,3 +24,7 @@ const UserSchema = new Schema({
         type: Boolean
     }
 })
+
+const User = mongoose.model('User', UserSchema)
+
+module.exports = User;
