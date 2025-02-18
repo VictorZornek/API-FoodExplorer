@@ -9,7 +9,7 @@ class UserDBService {
     }
 
     async getUserById(id) {
-        const user = await User.findOne({ _id: Types.ObjectId.createFromHexString(id) })
+        const user = await User.findOne({ _id: Types.ObjectId.createFromHexString(id) }).select('-password')
     
         return user
     }
@@ -21,7 +21,7 @@ class UserDBService {
     }
 
     async getAllUsers() {
-        const users = await User.find()
+        const users = await User.find().select('-__v -password')
 
         return users
     }

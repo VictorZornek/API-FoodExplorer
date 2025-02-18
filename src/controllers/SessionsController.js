@@ -23,6 +23,8 @@ class SessionsController {
             throw new AppError("E-mail e/ou senha inválidos!", 401)
         }
 
+        const authenticatedUser = { ...user.toObject(), password: undefined, __v: undefined }
+
         const { secret, expiresIn } = authConfig.jwt
 
         const token = sign({}, secret, {
@@ -30,7 +32,7 @@ class SessionsController {
             expiresIn
         })
 
-        return response.json({ user, token })
+        return response.json({ user: authenticatedUser, token })
     }
 }
 

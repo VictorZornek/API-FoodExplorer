@@ -31,11 +31,17 @@ class UsersController {
     }
 
     async delete(request, response) {
-        const { id } = request.user
+        const { user } = request.user
 
-        await dbService.deleteUser(id)
+        await dbService.deleteUser(user._id)
 
         return response.status(200).json({ message: "Usuário deletado com sucesso!" })
+    }
+
+    async show(request, response) {
+        const { user } = request.user
+
+        return response.status(200).json({ user })
     }
 
     async index(request, response) {
