@@ -31,7 +31,6 @@ const CatalogSchema = new Schema({
 
     image: {
         type: String,
-        required: true
     }
 })
 
