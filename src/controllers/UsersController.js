@@ -1,8 +1,8 @@
 const AppError = require("../utils/AppError");
 const { hash } = require("bcryptjs");
-const UserDBService = require("../database/services/userService")
+const UserDBService = require("../database/services/userService");
 
-const dbService = new UserDBService()
+const dbService = new UserDBService();
 
 class UsersController {
     async create(request, response) {
