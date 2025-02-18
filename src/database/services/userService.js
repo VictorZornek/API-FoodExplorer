@@ -8,6 +8,12 @@ class UserDBService {
         return user
     }
 
+    async getUserById(id) {
+        const user = await User.findOne({ _id: Types.ObjectId.createFromHexString(id) })
+    
+        return user
+    }
+
     async createUser(user_data) {
         const user = new User(user_data)
 

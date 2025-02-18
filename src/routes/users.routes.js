@@ -8,5 +8,6 @@ const usersController = new UsersController();
 
 usersRoutes.post("/", usersController.create);
 usersRoutes.get("/", usersController.index)
+usersRoutes.delete("/", )
 
 module.exports = usersRoutes;
