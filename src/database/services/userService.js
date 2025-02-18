@@ -9,7 +9,7 @@ class UserDBService {
     }
 
     async getUserById(id) {
-        const user = await User.findOne({ _id: Types.ObjectId.createFromHexString(id) }).select('-password')
+        const user = await User.findOne({ _id: Types.ObjectId.createFromHexString(id) })
     
         return user
     }
@@ -28,6 +28,13 @@ class UserDBService {
 
     async deleteUser(id) {
         await User.deleteOne({ _id: Types.ObjectId.createFromHexString(id) })
+    }
+
+    async updateUser(id, user_data) {
+        await User.updateOne(
+            { _id: Types.ObjectId.createFromHexString(id) }, 
+            { $set: user_data }
+        )
     }
 }
 

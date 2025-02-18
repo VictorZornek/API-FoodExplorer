@@ -9,8 +9,9 @@ const usersRoutes = Router();
 const usersController = new UsersController();
 
 usersRoutes.post("/", usersController.create);
+usersRoutes.put("/", ensureAuthenticated, usersController.update);
+usersRoutes.delete("/", ensureAuthenticated, usersController.delete);
 usersRoutes.get("/", usersController.index);
 usersRoutes.get("/profile", ensureAuthenticated, usersController.show);
-usersRoutes.delete("/", ensureAuthenticated, usersController.delete);
 
 module.exports = usersRoutes;
