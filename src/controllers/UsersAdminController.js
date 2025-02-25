@@ -41,7 +41,53 @@ class UsersAdminController {
     }
 
     async update(request, response) {
+        const { user } = request.user
+        const { id } = request.query
 
+        const {
+            name,
+            category,
+            ingredients,
+            price,
+            description
+        } = request.body
+
+        if (!user.isAdmin) {
+            throw new AppError("Somente usuários administradores podem atualizar um produto!", 401)
+        }
+
+        if (!name || !category || !ingredients || !price || !description) {
+            throw new AppError("Todos os campos precisam ser preenchidos!")
+        }
+
+        const checkNameChange = await dbService.getProductByName(name)
+
+        if (checkNameChange && checkNameChange._id.toString() !== id.toString()) {
+            throw new AppError("Este nome já está cadastrado para outro produto!")
+        }
+
+        await dbService.updateProduct(id.toString(), {
+            name,
+            category,
+            ingredients,
+            price,
+            description
+        })
+
+        return response.status(200).json({ message: "Produto alterado com sucesso!" })
+    }
+
+    async delete(request, response) {
+        const { user } = request.user
+        const { id } = request.query
+
+        if (!user.isAdmin) {
+            throw new AppError("Somente usuários administradores podem deletar um produto!", 401)
+        }
+
+        await dbService.deleteProduct(id)
+
+        return response.status(200).json({ message: "Produto deletado com sucesso!" })
     }
 }
 

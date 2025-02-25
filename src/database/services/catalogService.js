@@ -20,6 +20,17 @@ class CatalogDBService {
         return products
     }
 
+    async updateProduct(id, product_data) {
+        await Catalog.updateOne(
+            { _id: Types.ObjectId.createFromHexString(id) },
+            { $set: product_data }
+        )
+    }
+
+    async deleteProduct(id) {
+        await Catalog.deleteOne({ _id: Types.ObjectId.createFromHexString(id) })
+    }
+
 }
 
 module.exports = CatalogDBService;
