@@ -8,6 +8,12 @@ class CatalogDBService {
         return product
     }
 
+    async getProductById(id) {
+        const product = await Catalog.findOne({ _id: Types.ObjectId.createFromHexString(id) })
+
+        return product
+    }
+
     async createProduct(product_data) {
         const product = new Catalog(product_data)
 
